@@ -1,30 +1,47 @@
 var express = require("express");
-var bodyParser = require("body-parser");
-
-// bring in the models
-var db = require("./models");
-
+var passport   = require('passport');
+var session    = require('express-session');
+var bodyParser = require('body-parser');
+var env = require('dotenv').load();
 var app = express();
+
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
+// Set bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+// For Passport
+ 
+app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
+ 
+app.use(passport.initialize());
+ 
+app.use(passport.session()); // persistent login sessions
+
+
+// For handlebars
 
 var exphbs = require("express-handlebars");
-
+app.set('views', './app/views');
 app.engine("handlebars", exphbs({
-  defaultLayout: "main"
-}));
+  defaultLayout: "main",
+  layoutsDir: __dirname + '/app/views/layouts',
+	partialsDir: __dirname + 'app/views/partials/'}));
 app.set("view engine", "handlebars");
 
-/*var routes = require("./routes/routes");
 
-app.use("/", routes);
-app.use("/update", routes);
-app.use("/create", routes); */
+// bring in the models
+var db = require("./app/models");
+
+//Routes
+var authRoute = require('./app/routes/auth.js')(app,passport);
+var patternRoute = require('./app/routes/patterns.js')(app,passport);
+//load passport strategies
+require('./app/config/passport/passport.js')(passport, db.user);
+
 
 
 // listen on port 3000
