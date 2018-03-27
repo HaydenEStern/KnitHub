@@ -17,8 +17,7 @@
     “use_env_variable”: “DATABASE_URL”,
     "username": "pnjhq926mm8c8kko",
     "password": "dlbaeadg59sydute",
-    "database": "database_production",
-    "host": "q3vtafztappqbpzn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host": "http://knithub.herokuapp.com",
     "dialect": "mysql"
   }
 }
