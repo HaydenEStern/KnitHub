@@ -31,7 +31,7 @@ module.exports = function(app) {
             failureRedirect: '/signin'
         }));
 
-    app.get('/', authController.signup);
+    app.get('/', authController.index);
 
 
 }
