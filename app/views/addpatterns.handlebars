@@ -140,7 +140,7 @@ getColorVal = function(){
         written_instructions: writtenInstructions
             .val()
             .trim(),
-        userId: {{user.id}}
+        pattern_author: "{{user.username}}"
     };
 
     submitPattern(newPattern);
@@ -150,8 +150,10 @@ getColorVal = function(){
 
     // Submits a new post and brings user to blog page upon completion
     function submitPattern(pattern) {
-        $.post("/addpatterns", pattern);
+        $.post("/addpatterns", pattern, function() {
         window.location.href = "/mypatterns";
+    });
     }
 
-});</script>
+});
+</script>

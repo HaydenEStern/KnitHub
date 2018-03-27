@@ -19,3 +19,4 @@ exports.addpatterns = function(req, res) {
     res.render('addpatterns', { user: req.user });
 
 }
+

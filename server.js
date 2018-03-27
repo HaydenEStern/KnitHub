@@ -46,7 +46,7 @@ require('./app/config/passport/passport.js')(passport, db.user);
 
 // listen on port 3000
 var port = process.env.PORT || 3000;
-db.sequelize.sync().then(function() {
+db.sequelize.sync({force: true}).then(function() {
   app.listen(port);
   console.log("server running on port " + port);
 });
