@@ -30,4 +30,5 @@ app.get('/addpatterns', isLoggedIn, patternController.addpatterns);
   // GET route for viewing user patterns
   app.get('/mypatterns', isLoggedIn, patternController.mypatterns);
 
+  
 };

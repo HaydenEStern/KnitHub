@@ -1,10 +1,5 @@
 module.exports = function(sequelize, Sequelize) {
   var User = sequelize.define("user", {
-    id: {
-            autoIncrement: true,
-            primaryKey: true,
-            type: Sequelize.INTEGER
-        },
  
         firstname: {
             type: Sequelize.STRING,
@@ -17,7 +12,8 @@ module.exports = function(sequelize, Sequelize) {
         },
  
         username: {
-            type: Sequelize.TEXT
+            type: Sequelize.STRING,
+            primaryKey: true
         },
  
         about: {
@@ -50,7 +46,8 @@ module.exports = function(sequelize, Sequelize) {
     // Associating User with Posts
     // When an User is deleted, also delete any associated Patterns
     User.hasMany(models.Pattern,
-      {onDelete: "cascade"
+      {foreignKey: 'pattern_author', sourceKey: 'username', constraints: false,
+        onDelete: "cascade"
     });
   };
   return User;

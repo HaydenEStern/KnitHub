@@ -37,11 +37,7 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false
             },
             pattern_author: {
-                type: DataTypes.STRING,
-                references: {
-                    model: User, // <<< Note, its table's name, not object name
-                    key: 'username', // <<< Note, its a column name
-                }
+                type: DataTypes.STRING
 
 
             }
