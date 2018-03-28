@@ -7,13 +7,13 @@ module.exports = function(passport, user) {
     //serialize
     passport.serializeUser(function(user, done) {
 
-        done(null, user._id);
+        done(null, user.username);
 
     });
     // deserialize user 
-    passport.deserializeUser(function(id, done) {
+    passport.deserializeUser(function(name, done) {
 
-        User.findById(id).then(function(user) {
+        User.findOne({user.username: name}).then(function(user) {
 
             if (user) {
 
