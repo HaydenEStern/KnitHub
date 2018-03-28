@@ -5,7 +5,7 @@ exports.mypatterns = function(req, res) {
 
     db.Pattern.findAll({
         where: {
-            userId: req.user.id
+            pattern_author: req.user.username
         }
     }).then(function(patterns) {
         res.render('mypatterns', { user: req.user, myPatterns: patterns})
